@@ -121,7 +121,7 @@ def test():
     global word_2_index,model,index_2_tag,device
     while True:
         text = input("请输入：")
-        text_index = [[word_2_index[i] for i in text]]
+        text_index = [[word_2_index.get(i,word_2_index["<PAD>"]) for i in text]]
         text_index = torch.tensor(text_index,dtype=torch.int64,device=device)
         model.forward(text_index)
         pre = [index_2_tag[i] for i in model.pre]
@@ -141,7 +141,7 @@ if __name__ == "__main__":
     corpus_num = len(word_2_index)
     class_num  = len(tag_2_index)
 
-    epoch = 5
+    epoch = 10
     train_batch_size = 50
     dev_batch_size = 100
     embedding_num = 101
