@@ -3,8 +3,8 @@ from itertools import zip_longest
 from torch.utils.data import Dataset,DataLoader
 import torch
 import torch.nn as nn
-from sklearn.metrics import f1_score
-
+# from sklearn.metrics import f1_score
+from seqeval.metrics import f1_score
 
 def build_corpus(split, make_vocab=True, data_dir="data"):
     """读取数据"""
@@ -272,7 +272,8 @@ def test():
     global word_2_index,model,index_2_tag,device
     while True:
         text = input("请输入：")
-        text_index = [[word_2_index.get(i,word_2_index["<UNK>"]) for i in text]]
+        text_index = [[word_2_index.get(i,word_2_index["<UNK>"]) for i in text] + [word_2_index["<END>"]]]
+
         text_index = torch.tensor(text_index,dtype=torch.int64,device=device)
         pre = model.test(text_index,[len(text)])
         pre = [index_2_tag[i] for i in pre]
