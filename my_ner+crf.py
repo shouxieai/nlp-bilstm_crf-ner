@@ -3,8 +3,8 @@ from itertools import zip_longest
 from torch.utils.data import Dataset,DataLoader
 import torch
 import torch.nn as nn
-# from sklearn.metrics import f1_score
-from seqeval.metrics import f1_score
+from sklearn.metrics import f1_score
+# from seqeval.metrics import f1_score
 
 def build_corpus(split, make_vocab=True, data_dir="data"):
     """读取数据"""
