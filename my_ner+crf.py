@@ -275,7 +275,7 @@ def test():
         text_index = [[word_2_index.get(i,word_2_index["<UNK>"]) for i in text] + [word_2_index["<END>"]]]
 
         text_index = torch.tensor(text_index,dtype=torch.int64,device=device)
-        pre = model.test(text_index,[len(text)])
+        pre = model.test(text_index,[len(text)+1])
         pre = [index_2_tag[i] for i in pre]
         print([f'{w}_{s}' for w,s in zip(text,pre)])
 
